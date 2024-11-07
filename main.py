@@ -4,9 +4,12 @@ from database import init_db
 from models import Service, Metric
 from components.metrics import display_service_metrics
 from components.charts import create_dashboard_charts
+from components.monitoring import monitoring_system
+from components.alerts import display_alerts
 
-# Initialize the database
+# Initialize the database and start monitoring
 init_db()
+monitoring_system.start_monitoring()
 
 # Page configuration
 st.set_page_config(
@@ -17,6 +20,9 @@ st.set_page_config(
 
 # Main dashboard
 st.title("Enterprise Service Management Dashboard")
+
+# Display Alerts
+display_alerts()
 
 # Service Overview
 col1, col2, col3, col4 = st.columns(4)
